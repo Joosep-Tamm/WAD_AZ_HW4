@@ -18,11 +18,13 @@ const routes = [
         name: "APost",
         component: APost,
     },
+    
     {
         path: "/addpost",
         name: "AddPost",
         component: AddPost,
     },
+    
     {
         path: "/signup",
         name: "SignUp",

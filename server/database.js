@@ -1,22 +1,24 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: "postgres",
-    password: "Paikenepostgres1",
-    database: "homework4",
+    password: "password", // Enter your password here
+    database: "homework4", //Try to use the same name for your database
     host: "localhost",
-    port: "5433"
+    port: "5432"
 });
 
-const execute = async(query) => {
+const execute = async(query1, query2) => {
     try {
-        await pool.connect(); // create a connection
-        await pool.query(query); // executes a query
+        await pool.connect(); // gets connection
+        await pool.query(query1); // sends queries
+        await pool.query(query2); // sends queries
         return true;
     } catch (error) {
         console.error(error.stack);
         return false;
     }
 };
+
 
 const createUserTblQuery = `
     CREATE TABLE IF NOT EXISTS "users" (
@@ -29,13 +31,13 @@ const createPostTblQuery = `
     CREATE TABLE IF NOT EXISTS "posts" (
         id SERIAL PRIMARY KEY,
         "date" VARCHAR(200) NOT NULL,
-	    "body" VARCHAR(200) NOT NULL,
+	    "body" VARCHAR(200) NOT NULL
     );`;
 
-    execute(createUserTblQuery, createPostTblQuery).then(result => {
-        if (result) {
-            console.log('If either does not exist, table "users" and table "posts" are created');
-        }
-    });
+execute(createUserTblQuery, createPostTblQuery).then(result => {
+    if (result) {
+        console.log('If either does not exist, table "users" and table "posts" are created');
+    }
+});
 
 module.exports = pool;

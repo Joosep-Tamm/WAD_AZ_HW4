@@ -170,13 +170,14 @@ app.put('/api/posts/:id', async(req, res) => {
         const post = req.body;
         console.log("update request has arrived");
         const updatepost = await pool.query(
-            "UPDATE posts SET (body) = ($2) WHERE id = $1 RETURNING*", [id, post.body]
+            "UPDATE posts SET body = $2 WHERE id = $1 RETURNING*", [id, post.body]
         );
         res.json(updatepost);
     } catch (err) {
         console.error(err.message);
     }
 });
+  
 
 app.delete('/api/posts/:id', async(req, res) => {
     try {
