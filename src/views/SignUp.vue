@@ -5,8 +5,10 @@
     <input type="email" name="email" required v-model="email">
     <label for="password">Password</label>
     <input type="password" name="password" required v-model="password">
-    <div v-if="errMsg">{{ errMsg }} </div>
-    <button @click="SignUp" class="SignUp">SignUp</button>
+    <div v-if="errMsg" class="errorMessage">{{ errMsg }} </div>
+    <div class="container">
+      <button @click="SignUp" class="center">SignUp</button>
+    </div>
   </div>
 </template>
 
@@ -87,7 +89,7 @@ export default {
 .form {
   max-width: 420px;
   margin: 30px auto;
-  background: rgb(167, 154, 154);
+  background: #6e8b97;
   text-align: left;
   padding: 40px;
   border-radius: 10px;
@@ -95,11 +97,11 @@ export default {
 
 h3 {
   text-align: center;
-  color: rgb(8, 110, 110);
+  color: whitesmoke;
 }
 
 label {
-  color: rgb(8, 110, 110);
+  color: whitesmoke;
   display: inline-block;
   margin: 25px 0 15px;
   font-size: 0.8em;
@@ -118,19 +120,20 @@ input {
   color: blue;
 }
 
-button {
-  background: rgb(8, 110, 110);
+.center {
+  margin: auto;
   border: 0;
   padding: 10px 20px;
   margin-top: 20px;
-  color: white;
-  border-radius: 20px;
-  align-items: center;
-  text-align: center;
+  width: 30%;
 }
 
-div {
-  padding: 10px 20px;
-  margin-top: 20px;
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.errorMessage {
+  padding: 10px;
 }
 </style>

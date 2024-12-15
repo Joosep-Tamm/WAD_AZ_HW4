@@ -1,13 +1,13 @@
 <template>
   <div class="A Post">
-    <div id="form">
+    <div class="form">
       <h3>A Post</h3>
       <label for="body">Body: </label>
       <input name="body" type="text" id="body" required v-model="post.body" />
-    </div>
-    <div class="container">
-      <button @click="updatePost" class="updatePost">Update Post</button>
-      <button @click="deletePost" class="deletePost">Delete Post</button>
+      <div class="container">
+        <button @click="updatePost" class="updatePost">Update Post</button>
+        <button @click="deletePost" class="deletePost">Delete Post</button>
+      </div>
     </div>
   </div>
 </template>
@@ -68,20 +68,22 @@ export default {
 </script>
 
 <style scoped>
-#form {
+.form {
   max-width: 420px;
   margin: 30px auto;
-  background: rgb(167, 154, 154);
+  background: #6e8b97;
   text-align: left;
   padding: 40px;
   border-radius: 10px;
 }
+
 h3 {
   text-align: center;
-  color: rgb(8, 110, 110);
+  color: whitesmoke;
 }
+
 label {
-  color: rgb(8, 110, 110);
+  color: whitesmoke;
   display: inline-block;
   margin: 25px 0 15px;
   font-size: 0.8em;
@@ -89,6 +91,7 @@ label {
   letter-spacing: 1px;
   font-weight: bold;
 }
+
 input {
   display: block;
   padding: 10px 6px;
@@ -98,19 +101,22 @@ input {
   border-bottom: 1px solid white;
   color: blue;
 }
+
 button {
   background: rgb(8, 110, 110);
   border: 0;
   padding: 10px 20px;
   margin-top: 20px;
-  color: white;
+  color: whitesmoke;
   border-radius: 20px;
 }
+
 button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
+
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
 }
 </style>

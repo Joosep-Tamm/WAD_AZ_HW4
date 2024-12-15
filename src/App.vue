@@ -68,16 +68,17 @@ nav a.router-link-exact-active {
 }
 button{
   border-radius: 36px;
-  background: #FEE996;
+  background: rgb(8, 110, 110);
   border:0;
   font-weight: 700;
   font-size: 0.8em;
   display: block;
   padding: 10px 16px;
   letter-spacing: 2px;
+  color: whitesmoke
 }
 button:hover {
-  background: #dec870;
+  background: rgb(4, 63, 63);
   cursor: pointer;
 }
 

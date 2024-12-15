@@ -80,14 +80,6 @@ const routes = [{
     path: "/contactus",
     name: "ContactUs",
     component: ContactUs,
-},
-{ //will route to MainPage view if none of the previous routes apply
-    path: "/:catchAll(.*)",
-    name: "MainPage",
-    component: MainPage,
-    beforeEnter: async (to, from, next) => {
-        next('/login')
-    }
 }
 ]
 
