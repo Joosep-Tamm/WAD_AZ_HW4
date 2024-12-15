@@ -191,3 +191,15 @@ app.delete('/api/posts/:id', async(req, res) => {
         console.error(err.message);
     }
 });
+
+app.delete('/api/posts', async(req, res) => {
+    try {
+        console.log("delete all posts request has arrived");
+        const deleteAllPosts = await pool.query(
+            "DELETE FROM posts RETURNING *" 
+        );
+        res.json(deleteAllPosts.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});

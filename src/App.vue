@@ -3,9 +3,9 @@
 
     <nav>
       <router-link to="/mainpage">Posts</router-link> |
-      <router-link to="/addpost">Add a Post</router-link> |
       <router-link to="/signup">SignUp</router-link>|
-      <router-link to="/login">Login</router-link>
+      <router-link to="/login">Login</router-link>|
+      <router-link to="/contactus">ContactUs</router-link>
     </nav>
     <router-view />
   
@@ -70,6 +70,10 @@ button{
   padding: 10px 16px;
   letter-spacing: 2px;
 }
+button:hover {
+  cursor: pointer;
+}
+
 .container {
   display: flex;
   justify-content: center;

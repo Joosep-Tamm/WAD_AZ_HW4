@@ -17,6 +17,10 @@
           </a>
         </li>
       </ul>
+      <div class="buttons-container">
+        <button @click="navigateToAddPost">Add a Post</button>
+        <button @click="deleteAllPosts">Delete all</button>
+      </div>
     </div>
   </div>
 </template>
@@ -30,12 +34,29 @@ export default {
     };
   },
   methods: {
+    navigateToAddPost() {
+      this.$router.push("/addpost"); 
+    },
     fetchPosts() {
       fetch(`http://localhost:3000/api/posts/`)
         .then((response) => response.json())
         .then((data) => (this.posts = data))
         .catch((err) => console.log(err.message));
     },
+    deleteAllPosts() {
+      fetch("http://localhost:3000/api/posts/", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+      .then((response) => {
+        this.fetchPosts(); 
+        return response.json(); 
+      })
+      .catch((e) => {
+        console.error("Error deleting posts:", e.message);
+      });
+    },
+
   },
   mounted() {
     this.fetchPosts();
@@ -95,6 +116,15 @@ a:hover {
   width: 50%;
   border-radius: 20px;
 }
+
+.buttons-container {
+  display: flex;
+  margin: auto;
+  width: 50%;
+  justify-content: space-between;
+  margin-bottom: 10px
+}
+
 
 #post-list ul {
   padding: 0;
