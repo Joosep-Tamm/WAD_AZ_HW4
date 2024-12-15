@@ -30,17 +30,32 @@ export default {
     validatePassword(value) {
       if (value.length < 8) {
         this.errMsg = "Password must be at least 8 characters.";
+        return false
       } else if (value.length >= 16) {
         this.errMsg = "Password must be less than 16 characters.";
+        return false
       } else if (!/[A-Z]/.test(value)) {
         this.errMsg = "Password must include at least one uppercase letter.";
+        return false
       } else if (!/[0-9]/.test(value)) {
         this.errMsg = "Password must include at least one number.";
-      } else {
-        this.errMsg = ''; // Clear error message if all checks pass
+        return false
       }
+      this.errMsg = ''; // Clear error message if all checks pass
+      return true
     },
     SignUp() {
+
+      if (!this.validatePassword(this.password)) return
+
+      const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+      if (!emailRegex.test(this.email)) {
+        // If email is not valid, show an alert or set an error message
+        alert("Please enter a valid email address.");
+        return;  // Prevent further execution
+      }
+
       var data = {
         email: this.email,
         password: this.password
@@ -61,6 +76,7 @@ export default {
         .catch((e) => {
           console.log(e);
           console.log("error");
+          alert("Error while signing up")
         });
     },
   },

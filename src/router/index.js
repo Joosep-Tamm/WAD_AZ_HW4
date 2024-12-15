@@ -29,18 +29,41 @@ const routes = [{
     path: "/mainpage",
     name: "MainPage",
     component: MainPage,
-
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) {
+            next('/login')
+        } else {
+            next();
+        }
+    }
 },
 {
     path: "/apost/:id",
     name: "APost",
     component: APost,
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) {
+            next('/login')
+        } else {
+            next();
+        }
+    }
 },
 
 {
     path: "/addpost",
     name: "AddPost",
     component: AddPost,
+    beforeEnter: async (to, from, next) => {
+        let authResult = await auth.authenticated();
+        if (!authResult) {
+            next('/login')
+        } else {
+            next();
+        }
+    }
 },
 
 {
@@ -57,6 +80,14 @@ const routes = [{
     path: "/contactus",
     name: "ContactUs",
     component: ContactUs,
+},
+{ //will route to MainPage view if none of the previous routes apply
+    path: "/:catchAll(.*)",
+    name: "MainPage",
+    component: MainPage,
+    beforeEnter: async (to, from, next) => {
+        next('/login')
+    }
 }
 ]
 

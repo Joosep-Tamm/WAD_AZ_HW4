@@ -19,7 +19,7 @@
     },
     methods: {
       addPost() {
-        var data = {
+        let data = {
             body: this.post.body,
             date: new Date().toLocaleDateString("en-US", {
         month: "short",  // Abbreviated month (e.g., "Dec")
