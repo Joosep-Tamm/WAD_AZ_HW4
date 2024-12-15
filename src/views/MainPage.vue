@@ -89,18 +89,17 @@ a:hover {
   padding: 10px 15px; 
   border-radius: 10px;
   width: 50%;
-  min-height: 70px;
   margin: 10px auto;
   position: relative; 
+  display: flex; 
+  flex-direction: column; 
 }
 
 .item a {
-  position: absolute; 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1; 
+  display: block; 
+  position: static; 
+  text-decoration: none; 
+  color: inherit; 
 }
 
 .item:hover {
@@ -112,8 +111,8 @@ a:hover {
   box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
   margin-bottom: 30px;
   padding: 10px 20px;
-  margin: auto;
-  width: 50%;
+  max-width: 500px;
+  margin: 30px auto;
   border-radius: 20px;
 }
 
@@ -137,10 +136,15 @@ a:hover {
 
 .date {
   margin-right: 5px;
+  font-size: 0.8em;
 }
 
 .body-container {
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  word-wrap: break-word; 
+  white-space: pre-line; 
 }
 
 ul {
@@ -149,4 +153,12 @@ ul {
   align-items: center;
 }
 
+@media (max-width: 925px)  {
+  .buttons-container {
+    flex-direction: column;
+  }
+  button {
+    margin-top: 10px;
+  }
+}
 </style>
