@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     navigateToAddPost() {
-      this.$router.push("/addpost"); 
+      this.$router.push("/addpost");
     },
     fetchPosts() {
       fetch(`http://localhost:3000/api/posts/`)
@@ -48,15 +48,31 @@ export default {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       })
-      .then((response) => {
-        this.fetchPosts(); 
-        return response.json(); 
+        .then((response) => {
+          this.fetchPosts();
+          return response.json();
+        })
+        .catch((e) => {
+          console.error("Error deleting posts:", e.message);
+        });
+    },
+    Logout() {
+      fetch("http://localhost:3000/auth/logout", {
+          credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log('jwt removed');
+        //console.log('jwt removed:' + auth.authenticated());
+        this.$router.push("/login");
+        //location.assign("/");
       })
       .catch((e) => {
-        console.error("Error deleting posts:", e.message);
+        console.log(e);
+        console.log("error logout");
       });
     },
-
   },
   mounted() {
     this.fetchPosts();
@@ -71,39 +87,39 @@ h1 {
 }
 
 a {
-  text-decoration: none; 
-  color: inherit; 
-  display: block; 
-  width: 100%; 
-  height: 100%; 
-  cursor: pointer; 
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
 }
 
 a:hover {
-  text-decoration: none; 
+  text-decoration: none;
 }
 
 .item {
   background: rgb(189, 212, 199);
   margin-bottom: 5px;
-  padding: 10px 15px; 
+  padding: 10px 15px;
   border-radius: 10px;
   width: 50%;
   margin: 10px auto;
-  position: relative; 
-  display: flex; 
-  flex-direction: column; 
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 .item a {
-  display: block; 
-  position: static; 
-  text-decoration: none; 
-  color: inherit; 
+  display: block;
+  position: static;
+  text-decoration: none;
+  color: inherit;
 }
 
 .item:hover {
-  background: rgb(173, 200, 185); 
+  background: rgb(173, 200, 185);
 }
 
 #post-list {
@@ -143,8 +159,8 @@ a:hover {
   text-align: center;
   margin-top: 20px;
   margin-bottom: 20px;
-  word-wrap: break-word; 
-  white-space: pre-line; 
+  word-wrap: break-word;
+  white-space: pre-line;
 }
 
 ul {
@@ -153,10 +169,11 @@ ul {
   align-items: center;
 }
 
-@media (max-width: 925px)  {
+@media (max-width: 925px) {
   .buttons-container {
     flex-direction: column;
   }
+
   button {
     margin-top: 10px;
   }

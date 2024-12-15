@@ -21,7 +21,7 @@ const maxAge = 60 * 60; //unlike cookies, the expiresIn in jwt token is calculat
 
 const generateJWT = (id) => {
     return jwt.sign({ id }, secret, { expiresIn: maxAge })
-        //jwt.sign(payload, secret, [options, callback]), and it returns the JWT as string
+    //jwt.sign(payload, secret, [options, callback]), and it returns the JWT as string
 }
 
 app.listen(port, () => {
@@ -30,7 +30,7 @@ app.listen(port, () => {
 
 
 // is used to check whether a user is authinticated
-app.get('/auth/authenticate', async(req, res) => {
+app.get('/auth/authenticate', async (req, res) => {
     console.log('authentication request has been arrived');
     const token = req.cookies.jwt; // assign the token named jwt to the token const
     //console.log("token " + token);
@@ -60,7 +60,7 @@ app.get('/auth/authenticate', async(req, res) => {
 });
 
 // signup a user
-app.post('/auth/signup', async(req, res) => {
+app.post('/auth/signup', async (req, res) => {
     try {
         console.log("a signup request has arrived");
         //console.log(req.body);
@@ -87,7 +87,8 @@ app.post('/auth/signup', async(req, res) => {
     }
 });
 
-app.post('/auth/login', async(req, res) => {
+// login a user
+app.post('/auth/login', async (req, res) => {
     try {
         console.log("a login request has arrived");
         const { email, password } = req.body;
@@ -126,7 +127,7 @@ app.get('/auth/logout', (req, res) => {
     res.status(202).clearCookie('jwt').json({ "Msg": "cookie cleared" }).send
 });
 
-app.post('/api/posts', async(req, res) => {
+app.post('/api/posts', async (req, res) => {
     try {
         console.log("a post request has arrived");
         const post = req.body;
@@ -139,7 +140,7 @@ app.post('/api/posts', async(req, res) => {
     }
 });
 
-app.get('/api/posts', async(req, res) => {
+app.get('/api/posts', async (req, res) => {
     try {
         console.log("get posts request has arrived");
         const posts = await pool.query(
@@ -151,7 +152,7 @@ app.get('/api/posts', async(req, res) => {
     }
 });
 
-app.get('/api/posts/:id', async(req, res) => {
+app.get('/api/posts/:id', async (req, res) => {
     try {
         console.log("get a post with route parameter request has arrived");
         const { id } = req.params;
@@ -164,7 +165,7 @@ app.get('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.put('/api/posts/:id', async(req, res) => {
+app.put('/api/posts/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const post = req.body;
@@ -177,9 +178,9 @@ app.put('/api/posts/:id', async(req, res) => {
         console.error(err.message);
     }
 });
-  
 
-app.delete('/api/posts/:id', async(req, res) => {
+
+app.delete('/api/posts/:id', async (req, res) => {
     try {
         const { id } = req.params;
         console.log("delete a post request has arrived");
@@ -192,11 +193,11 @@ app.delete('/api/posts/:id', async(req, res) => {
     }
 });
 
-app.delete('/api/posts', async(req, res) => {
+app.delete('/api/posts', async (req, res) => {
     try {
         console.log("delete all posts request has arrived");
         const deleteAllPosts = await pool.query(
-            "DELETE FROM posts RETURNING *" 
+            "DELETE FROM posts RETURNING *"
         );
         res.json(deleteAllPosts.rows);
     } catch (err) {
