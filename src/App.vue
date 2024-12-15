@@ -1,20 +1,27 @@
 <template>
   <div>
 
-    <nav>
-      <router-link to="/mainpage">Posts</router-link> |
-      <router-link to="/signup">SignUp</router-link>|
-      <router-link to="/login">Login</router-link>|
-      <router-link to="/contactus">ContactUs</router-link>
-    </nav>
-    <router-view />
+    <AppHeader />
+    <div class="ContentWrapper">
+      <router-view />
+    </div>    
+    <AppFooter />
+
   
    
   </div>
 </template>
 
 <script>
+import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
+
+
 export default {
+  components: {
+    AppHeader,
+    AppFooter
+  },
   name: "App",
    methods: {
     Logout() {
@@ -77,5 +84,14 @@ button:hover {
 .container {
   display: flex;
   justify-content: center;
+}
+
+.ContentWrapper{
+  min-height: 76vh;
+  margin-bottom: 30px;
+}
+
+body {
+  margin: 0;
 }
 </style>
